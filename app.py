@@ -70,6 +70,18 @@ def submit():
 
     return jsonify({"message": new_message})
 
+@app.route('/health')
+def health():
+    try:
+        conn = get_connection()
+        cur = conn.cursor()
+        cur.execute('SELECT 1')
+        cur.close()
+        conn.close()
+        return jsonify({'status': 'healthy'}), 200
+    except Exception as e:
+        return jsonify({'status': 'unhealthy', 'error': str(e)}), 500
+
 
 if __name__ == "__main__":
     init_db()
