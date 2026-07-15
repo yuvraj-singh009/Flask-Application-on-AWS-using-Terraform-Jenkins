@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Clone Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/<your-github-username>/<your-repo-name>.git'
+                git branch: 'main', url: 'https://github.com/yuvraj-singh009/Flask-Application-on-AWS-using-Terraform-Jenkins.git'
             }
         }
         stage('Build Docker Image') {
