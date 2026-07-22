@@ -2,7 +2,9 @@
 set -e
 exec > >(tee /var/log/user-data.log) 2>&1
 
-apt update -y && apt upgrade -y
+apt update -y
+apt upgrade -y || echo "apt upgrade had non-fatal errors, continuing anyway"
+
 apt install -y git docker.io docker-compose-v2 curl
 systemctl start docker
 systemctl enable docker
@@ -19,3 +21,5 @@ systemctl enable jenkins
 usermod -aG docker jenkins
 systemctl restart jenkins
 systemctl restart docker
+
+echo ">>> Bootstrap complete"
